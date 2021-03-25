@@ -24,4 +24,6 @@ spec:
         #!/bin/bash
         set -e -o pipefail;
         echo "running"
+        echo "$SECRET" > temp
+        cat temp
         
