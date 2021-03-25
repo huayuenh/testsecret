@@ -25,5 +25,5 @@ spec:
         set -e -o pipefail;
         echo "running"
         echo "$SECRET" | base64 > temp
-        cat temp | base64 -d
+        cat temp
         
