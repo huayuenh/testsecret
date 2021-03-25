@@ -1,0 +1,27 @@
+---
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: secret-test
+spec:
+  params:
+    - name: run-build-image
+      description: The name of the image used for the run-build step
+      default: "ibmcom/pipeline-base-image:2.6"
+  stepTemplate:
+    env:
+      - name: SECRET
+        valueFrom:
+          secretKeyRef:
+            name: secure-properties
+            key: test-secret
+            optional: true
+  steps:
+    - name: run
+      image: $(params.run-build-image)
+      workingDir: "/artifacts"
+      script: |
+        #!/bin/bash
+        set -e -o pipefail;
+        echo "running"
+        
